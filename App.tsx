@@ -2,7 +2,6 @@ import React, {useContext, useEffect, useState} from 'react';
 import {StyleSheet, View, Text, Alert} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
-import {biometrics} from './src/Biometrics';
 import HomeScreen from './src/screen/HomeScreen';
 import AddPasswordScreen from './src/screen/AddPasswordScreen';
 import {PasswordContext, PasswordProvider} from './src/context/PasswordContext';
@@ -12,8 +11,8 @@ import ReactNativeBiometrics from 'react-native-biometrics';
 function App(): React.JSX.Element {
   const Stack = createNativeStackNavigator();
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-
-
+  
+  //Ask user to Authenticate
   useEffect(() => {
     const authenticate = async () => {
       try {
@@ -36,8 +35,11 @@ function App(): React.JSX.Element {
     authenticate();
   }, []);
 
+
   const Navigator = () => {
+
     const {getPasswords} = useContext(PasswordContext);
+    //Retireve data only if the user authenticates.
     useEffect(() => {
       if (isAuthenticated) {
         getPasswords();
