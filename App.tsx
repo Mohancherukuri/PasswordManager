@@ -17,9 +17,6 @@ function App(): React.JSX.Element {
     const handleAppStateChange = (newState:any) => {
       if (newState === 'active') {
         setHandleClose('active')
-        // Perform actions when app becomes active (foregrounded)
-        // For example, navigate to the initial screen or reset state
-        // Here you can implement your logic to reset state or navigate
       }
       else{
         setIsAuthenticated(false);

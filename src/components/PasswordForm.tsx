@@ -9,6 +9,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useNavigation} from '@react-navigation/native';
 
 import {ShowToastProps,showToast} from '../scripts/toast'
+import { validateForm } from '../scripts/validateForm';
 
 type PasswordFormProps = {
   isEditable: false;
@@ -41,16 +42,27 @@ const PasswordForm: React.FC<EditableFormProps | PasswordFormProps> = (
 
   const handleSubmit = () => {
     const updatedData = {userName, email, password, appName: selectedApp};
-    addPasswordData(updatedData);
-    setUserName('');
-    setEmail('');
-    setPassword('');
-    setSelectedApp('');
-    showToast({
-      type: 'success',
-      text1: 'Sucess',
-      text2: 'Data has been added Successfully',
-    });
+    const isValidData = validateForm(updatedData) as string | null;
+    if(isValidData === null){
+      addPasswordData(updatedData);
+      setUserName('');
+      setEmail('');
+      setPassword('');
+      setSelectedApp('');
+      showToast({
+        type: 'success',
+        text1: 'Sucess',
+        text2: 'Data has been added Successfully',
+      });
+    }
+    else{
+      showToast({
+        type: 'error',
+        text1: 'Warning',
+        text2: isValidData,
+      });
+    }
+    
   };
 
   const handleDelete = (id: string) => {
@@ -67,14 +79,24 @@ const PasswordForm: React.FC<EditableFormProps | PasswordFormProps> = (
 
   const handleUpdate = (id: string) => {
     const updatedData = {id, userName, email, password, appName: selectedApp};
-    updatePasswordData(id, updatedData);
-    showToast({
-      type: 'success',
-      text1: 'Sucess',
-      text2: 'Data has been Updated Successfully',
-    });
-    if (props.isEditable) {
-      navigation.popToTop();
+    const isValidData = validateForm(updatedData) as string | null;
+    if(isValidData === null){
+      updatePasswordData(id, updatedData);
+      showToast({
+        type: 'success',
+        text1: 'Sucess',
+        text2: 'Data has been Updated Successfully',
+      });
+      if (props.isEditable) {
+        navigation.popToTop();
+      }
+    }
+    else{
+      showToast({
+        type: 'error',
+        text1: 'Warning',
+        text2: isValidData,
+      });
     }
   };
 

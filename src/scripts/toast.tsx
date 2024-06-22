@@ -14,5 +14,7 @@ export const showToast = ({type,text1,text2,visibilityTime = 4000} : ShowToastPr
       text1: text1,
       text2: text2,
       visibilityTime: visibilityTime,
+      text1Style : {fontSize : 24},
+      text2Style : {fontSize : 16}
     });
   };
