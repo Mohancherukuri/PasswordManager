@@ -1,7 +1,8 @@
-import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, { useContext } from 'react';
+import {Alert, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {PasswordDataTypeWithId} from '../@types/PasswordDataType';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import { PasswordContext } from '../context/PasswordContext';
 
 type PasswordCardProps = {
   passwordData: PasswordDataTypeWithId;
@@ -9,12 +10,41 @@ type PasswordCardProps = {
 };
 
 const PasswordCard = ({passwordData, navigation}: PasswordCardProps) => {
+  const {deletePasswordData} = useContext(PasswordContext)
   const goToPasswordDataScreen = () => {
     navigation.navigate('PasswordScreen', {passwordData});
   };
 
+  const handleLongPress = () => {
+    Alert.alert(
+      'Delete Password',
+      'Do you want to delete data related to this APP/Website',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => {},
+          style: 'cancel',
+        },
+        {
+          text: 'Delete',
+          onPress: () => {
+            deletePasswordData(String(passwordData.id))
+            Alert.alert(
+              'Data deleted Successfully',
+            )
+          },
+          style: 'destructive',
+        }
+      ],
+      {
+        cancelable: true,
+        onDismiss: () => {}
+      }
+    );
+  }
+
   return (
-    <TouchableOpacity style={styles.container} onPress={goToPasswordDataScreen}>
+    <TouchableOpacity style={styles.container} onPress={goToPasswordDataScreen} onLongPress={handleLongPress}>
       <Image source={require('../resources/lock.png')} style={styles.image} />
       <View>
         <Text style={{fontSize: 22,color : "#000"}}>{passwordData.appName.toUpperCase()}</Text>
