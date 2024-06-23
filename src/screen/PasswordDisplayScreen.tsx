@@ -5,7 +5,6 @@ import { PasswordDataTypeWithId } from '../@types/PasswordDataType'
 import TitleHeader from '../components/TitleHeader'
 import Toast from 'react-native-toast-message'
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import { biometrics } from '../Biometrics'
 
 import PasswordForm from '../components/PasswordForm'
 type PasswordDisplayScreenProp = {

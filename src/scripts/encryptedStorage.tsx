@@ -59,8 +59,6 @@ export const getName = () => {
             if(userData !== undefined){
                 if(userData !== null){
                     const userName =  JSON.parse(userData).name;
-                    console.log("Here we are finally");
-                    console.log(userName)
                     return userName;
                 }
             }
