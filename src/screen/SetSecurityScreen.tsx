@@ -1,5 +1,5 @@
 // Import necessary components from React Native
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, Button, StyleSheet} from 'react-native';
 import ReactNativeBiometrics, {BiometryTypes} from 'react-native-biometrics';
 // Define your component
@@ -14,6 +14,11 @@ const SetSecurityScreen = () => {
       setIsPasswordSet(false);
     }
   };
+
+  useEffect(()=>{
+    biometrics();
+  },[])
+
   return (
     <View style={styles.container}>
       

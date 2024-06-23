@@ -36,3 +36,39 @@ export const getFromStorage = () : Promise<PasswordDataTypeWithId[] | undefined>
     }
     return retrieveUserSession();
 }
+
+
+export const addName = (name : string) => {
+    async function sotreUserName() {
+        try{
+            await EncryptedStorage.setItem(
+                "passwordManager_UserName",JSON.stringify({name})
+            )
+        }
+        catch(error){
+
+        }
+    }
+    sotreUserName();
+}
+
+export const getName = () => {
+    async function retrieveName() {
+        try {
+            const userData = await EncryptedStorage.getItem("passwordManager_UserName");
+            if(userData !== undefined){
+                if(userData !== null){
+                    const userName =  JSON.parse(userData).name;
+                    console.log("Here we are finally");
+                    console.log(userName)
+                    return userName;
+                }
+            }
+        return ''
+
+        } catch (error) {
+            
+        }
+    }
+    return retrieveName();
+}

@@ -9,11 +9,16 @@ import PasswordDisplayScreen from './src/screen/PasswordDisplayScreen';
 import ReactNativeBiometrics from 'react-native-biometrics';
 import SetSecurityScreen from './src/screen/SetSecurityScreen';
 import {ToastProvider} from 'react-native-toast-notifications';
+import NameScreen from './src/screen/NameScreen';
+import {getName} from './src/scripts/encryptedStorage';
 
 function App(): React.JSX.Element {
   const Stack = createNativeStackNavigator();
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [handleClose, setHandleClose] = useState('active');
+  const [userName, setUserName] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+  const [bioFound,setBioFound] = useState(false);
   useEffect(() => {
     const handleAppStateChange = (newState: any) => {
       if (newState === 'active') {
@@ -47,8 +52,16 @@ function App(): React.JSX.Element {
       }
     };
 
-    authenticate();
-  }, [handleClose]);
+    const userExists = async () => {
+      const userName = await getName();
+      setIsLoading(false);
+      if (userName !== '') {
+        setUserName(userName);
+        authenticate();
+      }
+    };
+    userExists();
+  }, [handleClose, userName]);
 
   const Navigator = () => {
     const {getPasswords} = useContext(PasswordContext);
@@ -92,25 +105,36 @@ function App(): React.JSX.Element {
     );
   };
 
+  if (isLoading || bioFound) {
+    return <></>;
+  }
+
   return (
-    <NavigationContainer>
-      <PasswordProvider>
-        <ToastProvider
-          placement="top"
-          duration={5000}
-          animationType="slide-in"
-          animationDuration={250}
-          successColor="green"
-          dangerColor="red"
-          warningColor="orange"
-          normalColor="gray"
-          textStyle={{fontSize: 20}}
-          offset={50}
-        >
-          <Navigator />
-        </ToastProvider>
-      </PasswordProvider>
-    </NavigationContainer>
+    <>
+      {userName === '' ? (
+        <>
+          <NameScreen setUserName={setUserName} />
+        </>
+      ) : (
+        <NavigationContainer>
+          <PasswordProvider>
+            <ToastProvider
+              placement="top"
+              duration={5000}
+              animationType="slide-in"
+              animationDuration={250}
+              successColor="green"
+              dangerColor="red"
+              warningColor="orange"
+              normalColor="gray"
+              textStyle={{fontSize: 20}}
+              offset={50}>
+              <Navigator />
+            </ToastProvider>
+          </PasswordProvider>
+        </NavigationContainer>
+      )}
+    </>
   );
 }
 

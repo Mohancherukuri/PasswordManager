@@ -1,9 +1,21 @@
-import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import React,{useEffect, useState} from 'react';
+import {Image, StyleSheet, Text, View} from 'react-native';
+
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import { getName } from '../scripts/encryptedStorage';
 
 const Header = () => {
+
+  const [userName,setUserName] = useState("");
+
+  useEffect(()=>{
+    const getUserName = async()=>{
+      const name = await getName();
+      setUserName(name);
+    }
+    getUserName();
+  },[])
+
   return (
     <View style={styles.container}>
       <View style={styles.imgContainer}>
@@ -16,7 +28,7 @@ const Header = () => {
             />
         </View>
         <View style={styles.textContainer}>
-          <Text style={{fontSize: 18, color: '#000'}}>Hello, Mohan</Text>
+          <Text style={{fontSize: 18, color: '#000'}}>Hello, {userName.toLocaleUpperCase()}</Text>
           <Text style={{fontSize: 18}}>Good Morning</Text>
         </View>
       </View>
