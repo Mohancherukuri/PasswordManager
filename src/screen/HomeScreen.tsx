@@ -20,7 +20,6 @@ const HomeScreen = ({navigation} : HomeScreenProp) => {
     <View style={{flex: 1}}>
       <Header />
       <View style={styles.container}>
-        <InputBar icon='search' placeholder='Search...'/>
         <HomeBody navigation={navigation}/>
       </View>
       <Footer onPress={handleNavigate}/>

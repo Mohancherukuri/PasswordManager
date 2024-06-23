@@ -1,8 +1,11 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {FlatList, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {PasswordContext} from '../context/PasswordContext';
 import PasswordCard from './PasswordCard';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import InputBar from './InputBar';
+import { PasswordDataType, PasswordDataTypeWithId } from '../@types/PasswordDataType';
+import { searchAppPassword } from '../scripts/search';
 
 const HomeBody = ({
   navigation,
@@ -10,19 +13,45 @@ const HomeBody = ({
   navigation: NativeStackNavigationProp<any, any>;
 }) => {
   const {passwordList} = useContext(PasswordContext);
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [list,setList] = useState<PasswordDataTypeWithId[]>(passwordList);
+  //Handle the Search Bar.
+
+  useEffect(()=>{
+    setList(passwordList);
+  },[passwordList])
+
+  const handleSearch = (text: string) => {
+    if (text === '') {
+      setList(passwordList);
+    } else {
+      setList(searchAppPassword(text,list));
+    }
+    setSearchTerm(text);
+  };
+
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.container}>
-        <Text style={styles.heading}>Your Passwords</Text>
-        {passwordList.map(passwordData => (
-          <PasswordCard
-            passwordData={passwordData}
-            navigation={navigation}
-            key={String(passwordData.id)}
-          />
-        ))}
-      </View>
-    </ScrollView>
+    <>
+      <InputBar
+        icon="search"
+        placeholder="Search..."
+        onChangeText={text => handleSearch(text)}
+        value={searchTerm}
+      />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.container}>
+          <Text style={styles.heading}>Your Passwords</Text>
+          {list.map(passwordData => (
+            <PasswordCard
+              passwordData={passwordData}
+              navigation={navigation}
+              key={String(passwordData.id)}
+            />
+          ))}
+        </View>
+      </ScrollView>
+    </>
   );
 };
 
