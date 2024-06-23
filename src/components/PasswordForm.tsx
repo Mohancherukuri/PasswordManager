@@ -7,8 +7,7 @@ import {PasswordDataTypeWithId} from '../@types/PasswordDataType';
 import Button from './Button';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useNavigation} from '@react-navigation/native';
-
-import {ShowToastProps,showToast} from '../scripts/toast'
+import { useToast } from "react-native-toast-notifications";
 import { validateForm } from '../scripts/validateForm';
 
 type PasswordFormProps = {
@@ -18,7 +17,6 @@ type PasswordFormProps = {
 interface EditableFormProps {
   isEditable: true;
   data: PasswordDataTypeWithId;
-  navigation: NativeStackNavigationProp<any, any>;
 }
 
 type Props = PasswordFormProps | EditableFormProps;
@@ -35,7 +33,7 @@ const PasswordForm: React.FC<EditableFormProps | PasswordFormProps> = (
   const [userName, setUserName] = useState(isEditable ? props.data.userName : '',);
   const [email, setEmail] = useState(isEditable ? props.data.email : '');
   const [password, setPassword] = useState(isEditable ? props.data.password : '',);
-
+  const toast = useToast();
   const [selectedApp, setSelectedApp] = useState(isEditable ? props.data.appName : '',);
   const [showNewApp, setNewApp] = useState(false);
   const [isSecurePassword, setIsSecurePassword] = useState(true); // State for password visibility
@@ -49,29 +47,24 @@ const PasswordForm: React.FC<EditableFormProps | PasswordFormProps> = (
       setEmail('');
       setPassword('');
       setSelectedApp('');
-      showToast({
-        type: 'success',
-        text1: 'Sucess',
-        text2: 'Data has been added Successfully',
-      });
+      toast.show("Data added Successfully.",{
+        type : "success",
+
+      })
     }
     else{
-      showToast({
-        type: 'error',
-        text1: 'Warning',
-        text2: isValidData,
-      });
+      toast.show(isValidData,{
+        type:"warning"
+      })
     }
     
   };
 
   const handleDelete = (id: string) => {
     deletePasswordData(id);
-    showToast({
-      type: 'success',
-      text1: 'Sucess',
-      text2: 'Data has been Deleted Successfully',
-    });
+    toast.show("Data Deleted Successfully",{
+      type : "success"
+    })
     if (props.isEditable) {
       navigation.popToTop();
     }
@@ -82,21 +75,17 @@ const PasswordForm: React.FC<EditableFormProps | PasswordFormProps> = (
     const isValidData = validateForm(updatedData) as string | null;
     if(isValidData === null){
       updatePasswordData(id, updatedData);
-      showToast({
-        type: 'success',
-        text1: 'Sucess',
-        text2: 'Data has been Updated Successfully',
-      });
+      toast.show('Data has been Updated Successfully',{
+          type : 'success'
+      })
       if (props.isEditable) {
         navigation.popToTop();
       }
     }
     else{
-      showToast({
-        type: 'error',
-        text1: 'Warning',
-        text2: isValidData,
-      });
+      toast.show(isValidData,{
+        type: "warning"
+      })
     }
   };
 

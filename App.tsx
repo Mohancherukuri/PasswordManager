@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {StyleSheet, View, Text, Alert,AppState} from 'react-native';
+import {StyleSheet, View, Text, Alert, AppState} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import HomeScreen from './src/screen/HomeScreen';
@@ -8,24 +8,24 @@ import {PasswordContext, PasswordProvider} from './src/context/PasswordContext';
 import PasswordDisplayScreen from './src/screen/PasswordDisplayScreen';
 import ReactNativeBiometrics from 'react-native-biometrics';
 import SetSecurityScreen from './src/screen/SetSecurityScreen';
+import {ToastProvider} from 'react-native-toast-notifications';
 
 function App(): React.JSX.Element {
   const Stack = createNativeStackNavigator();
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [handleClose,setHandleClose] = useState('active')
-  useEffect(()=>{
-    const handleAppStateChange = (newState:any) => {
+  const [handleClose, setHandleClose] = useState('active');
+  useEffect(() => {
+    const handleAppStateChange = (newState: any) => {
       if (newState === 'active') {
-        setHandleClose('active')
-      }
-      else{
+        setHandleClose('active');
+      } else {
         setIsAuthenticated(false);
         setHandleClose('close');
       }
     };
 
     AppState.addEventListener('change', handleAppStateChange);
-  },[isAuthenticated])
+  }, [isAuthenticated]);
 
   //Ask user to Authenticate
   useEffect(() => {
@@ -50,9 +50,7 @@ function App(): React.JSX.Element {
     authenticate();
   }, [handleClose]);
 
-
   const Navigator = () => {
-
     const {getPasswords} = useContext(PasswordContext);
     //Retireve data only if the user authenticates.
     useEffect(() => {
@@ -97,7 +95,20 @@ function App(): React.JSX.Element {
   return (
     <NavigationContainer>
       <PasswordProvider>
-        <Navigator />
+        <ToastProvider
+          placement="top"
+          duration={5000}
+          animationType="slide-in"
+          animationDuration={250}
+          successColor="green"
+          dangerColor="red"
+          warningColor="orange"
+          normalColor="gray"
+          textStyle={{fontSize: 20}}
+          offset={50}
+        >
+          <Navigator />
+        </ToastProvider>
       </PasswordProvider>
     </NavigationContainer>
   );

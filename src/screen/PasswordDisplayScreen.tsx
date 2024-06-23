@@ -38,13 +38,10 @@ const PasswordDisplayScreen = ({route,navigation} : PasswordDisplayScreenProp) =
 
   return (
     <View style={styles.container}>
-      <View style={{zIndex: 1}}>
-        <Toast position="top" />
-      </View>
       <TitleHeader navigation={navigation} title="Add Password" navigateTo = "Home"/>
       <View style={styles.formContainer}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <PasswordForm showToast={showToast} isEditable={true} data={data.passwordData}/>
+          <PasswordForm isEditable={true} data={data.passwordData}/>
         </ScrollView>
       </View>
     </View>

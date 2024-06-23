@@ -10,24 +10,14 @@ type AddPasswordScreenProps = {
 };
 
 const AddPasswordScreen = ({navigation}: AddPasswordScreenProps) => {
-  const showToast = () => {
-    Toast.show({
-      type: 'success',
-      text1: 'Success',
-      text2: 'Data added',
-      visibilityTime: 4000,
-    });
-  };
 
   return (
     <View style={styles.container}>
-      <View style={{zIndex: 1}}>
-        <Toast position="top" />
-      </View>
+  
       <TitleHeader navigation={navigation} title="Add Password" navigateTo = "Home"/>
       <View style={styles.formContainer}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <PasswordForm showToast={showToast} isEditable={false}/>
+          <PasswordForm isEditable={false}/>
         </ScrollView>
       </View>
     </View>
