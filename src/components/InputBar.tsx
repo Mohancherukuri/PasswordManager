@@ -93,14 +93,14 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    fontSize: 16,
+    fontSize: 14,
     marginLeft: 4,
     color: '#000',
   },
   label: {
     marginLeft: 20,
-    marginBottom: 20,
-    fontSize: 18,
+    marginBottom: 15,
+    fontSize: 16,
     color: '#000',
   },
 });

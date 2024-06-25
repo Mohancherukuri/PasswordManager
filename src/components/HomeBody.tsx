@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     paddingBottom: 40, // Add padding bottom to ensure space for scrolling
   },
   heading: {
-    fontSize: 26,
+    fontSize: 24,
     color: '#000',
     fontWeight: 'bold',
     marginBottom: 10,

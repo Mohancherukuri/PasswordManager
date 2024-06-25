@@ -47,8 +47,8 @@ const PasswordCard = ({passwordData, navigation}: PasswordCardProps) => {
     <TouchableOpacity style={styles.container} onPress={goToPasswordDataScreen} onLongPress={handleLongPress}>
       <Image source={require('../resources/lock.png')} style={styles.image} />
       <View>
-        <Text style={{fontSize: 22,color : "#000"}}>{passwordData.appName.toUpperCase()}</Text>
-        <Text style={{fontSize: 18,color : "#000"}}>{passwordData.userName || passwordData.email}</Text>
+        <Text style={{fontSize: 20,color : "#000"}}>{passwordData.appName.toUpperCase()}</Text>
+        <Text style={{fontSize: 16,color : "#000"}}>{passwordData.userName || passwordData.email}</Text>
       </View>
     </TouchableOpacity>
   );

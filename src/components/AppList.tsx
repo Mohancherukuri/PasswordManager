@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightgreen', // Background color when selected
   },
   itemText: {
-    fontSize: 18,
+    fontSize: 16,
     color : "#000"
   },
 });

@@ -38,6 +38,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: 30,
     marginHorizontal: 30,
+    borderBottomColor : "#000",
+    borderBottomWidth : 1,
+    paddingBottom : 20,
   },
   imgContainer: {
     display: 'flex',
@@ -53,7 +56,7 @@ const styles = StyleSheet.create({
     alignItems : 'center', 
   },
   textContainer: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 30,
   },
 });
 
