@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 24,
     marginBottom: 20,
+    color : "#000"
   },
   input: {
     height: 40,
@@ -48,6 +49,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingHorizontal: 10,
     marginBottom: 20,
+    color : "#000"
   },
   submitButton: {
     width: 100,
