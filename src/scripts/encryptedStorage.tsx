@@ -4,8 +4,9 @@ import { PasswordDataTypeWithId } from '../@types/PasswordDataType';
 export const addToStorage = (data:PasswordDataTypeWithId[]) =>{
     async function storeUserSession() {
         try {
+            const name = getName();
             await EncryptedStorage.setItem(
-                "userName_password",
+                `${name}asldkfjasdlfladsflksadfoiwei9o0kladvnasiovhkjsandfioyhsaiodfnikasdvhiuosadfgksdfghiou"`,
                 JSON.stringify({data})
             );
             // Congrats! You've just stored your first value!
