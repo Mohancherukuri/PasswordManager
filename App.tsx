@@ -13,12 +13,14 @@ import NameScreen from './src/screen/NameScreen';
 import {getName} from './src/scripts/encryptedStorage';
 
 function App(): React.JSX.Element {
+  
   const Stack = createNativeStackNavigator();
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [handleClose, setHandleClose] = useState('active');
   const [userName, setUserName] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [bioFound,setBioFound] = useState(false);
+
   useEffect(() => {
     const handleAppStateChange = (newState: any) => {
       if (newState === 'active') {

@@ -53,10 +53,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
+    color : "#000"
   },
   description: {
     textAlign: 'center',
     marginBottom: 20,
+    color : "#000"
   },
 
 });

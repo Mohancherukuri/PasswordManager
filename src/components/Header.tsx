@@ -29,7 +29,7 @@ const Header = () => {
         </View>
         <View style={styles.textContainer}>
           <Text style={{fontSize: 18, color: '#000'}}>Hello, {userName.toLocaleUpperCase()}</Text>
-          <Text style={{fontSize: 18}}>Good Morning</Text>
+          <Text style={{fontSize: 18,  color: '#000'}}>Good Morning</Text>
         </View>
       </View>
     </View>

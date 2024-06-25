@@ -18,14 +18,6 @@ type PasswordData = {
 
 const PasswordDisplayScreen = ({route,navigation} : PasswordDisplayScreenProp) => {
   const data = route.params as PasswordData | undefined;
-  const showToast = () => {
-    Toast.show({
-      type: 'success',
-      text1: 'Success',
-      text2: 'Data added',
-      visibilityTime: 4000,
-    });
-  };
 
   if(!data){
     return (
