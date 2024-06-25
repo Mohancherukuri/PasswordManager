@@ -1,7 +1,5 @@
 import React,{useEffect, useState} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
-
-import FeatherIcon from 'react-native-vector-icons/Feather';
 import { getName } from '../scripts/encryptedStorage';
 
 const Header = () => {
@@ -21,11 +19,7 @@ const Header = () => {
       <View style={styles.imgContainer}>
 
         <View style={styles.usrImage}>
-            <FeatherIcon 
-            name='user'
-            size={60}
-            color ="#000"
-            />
+          <Image source={require("../resources/logo.png")} style={{width : 70,height : 70, borderRadius : 40}}/>
         </View>
         <View style={styles.textContainer}>
           <Text style={{fontSize: 18, color: '#000'}}>Hello, {userName.toLocaleUpperCase()}</Text>
