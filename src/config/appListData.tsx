@@ -8,8 +8,9 @@ export const appListData = [
     { id: "w3nlk32", title: "YouTube" },
     { id: "l0sfg56", title: "Netflix" },
     { id: "g5mhj21", title: "Amazon" },
-    { id: "h4pqo23", title: "Spotify" },
     { id: "h4pqo243", title: "Fallulu" },
+    { id: "h4pqadsf", title: "Spotify" },
+
 
 ];
 

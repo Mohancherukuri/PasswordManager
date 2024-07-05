@@ -11,7 +11,7 @@ import SetSecurityScreen from './src/screen/SetSecurityScreen';
 import {ToastProvider} from 'react-native-toast-notifications';
 import NameScreen from './src/screen/NameScreen';
 import {getName} from './src/scripts/encryptedStorage';
-
+import Config from 'react-native-config';
 function App(): React.JSX.Element {
   
   const Stack = createNativeStackNavigator();
@@ -20,7 +20,7 @@ function App(): React.JSX.Element {
   const [userName, setUserName] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [bioFound,setBioFound] = useState(false);
-
+  console.log(Config.SECRET_KEY);
   useEffect(() => {
     const handleAppStateChange = (newState: any) => {
       if (newState === 'active') {

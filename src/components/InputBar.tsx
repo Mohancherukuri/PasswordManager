@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, TextInput, TouchableOpacity, Alert} from 'react-native';
-import {Text} from 'react-native-animatable';
+import {StyleSheet, View, TextInput, TouchableOpacity, Alert,Text} from 'react-native';
+
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import {TextInputProps} from 'react-native';
 import ReactNativeBiometrics from 'react-native-biometrics';

@@ -3,11 +3,10 @@ import {
   FlatList,
   Pressable,
   StyleSheet,
-  Touchable,
-  TouchableOpacity,
+  Text,View
 } from 'react-native';
 
-import {Text, View} from 'react-native-animatable';
+
 import {appListDataWithSelection} from '../config/appListData';
 import InputBar from './InputBar';
 import {searchFunction} from '../scripts/search';
@@ -85,7 +84,9 @@ const AppList = ({setSelectedApp, setNewApp}: AppListProps) => {
   const renderItem = ({item}: {item: DataItem}) => (
     <Pressable
       style={[styles.itemContainer, item.selected && styles.selectedItem]}
-      onPress={() => handleAppClick(item.id)}>
+      onPress={() => handleAppClick(item.id)}
+      testID={`${item.title}-button`}
+    >
       <Text style={styles.itemText}>{item.title}</Text>
     </Pressable>
   );
@@ -108,6 +109,7 @@ const AppList = ({setSelectedApp, setNewApp}: AppListProps) => {
           renderItem={renderItem}
           keyExtractor={item => item.id}
         />
+        
       </View>
     </>
   );
